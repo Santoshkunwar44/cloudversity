@@ -6,10 +6,10 @@ export const CourseCardWrapper = styled.div`
 min-width:350px;
 flex:1;
 
-height:200px;
+
 background:var(--light_bg);
 border-radius:10px;
-padding:1rem;
+padding:1.3rem;
 display:flex;
 flex-direction:column;
 gap:1.5rem;
@@ -20,7 +20,7 @@ cursor:pointer;
     gap:1rem;
 }
 .couseTitle{
-    color:var(--primary_color);
+
     letter-spacing:0.9px;
     
 }
@@ -30,12 +30,12 @@ cursor:pointer;
     img{
         width:40px;
         height:40px;
-        border:3px solid var(--primary_color);
+        border:3px solid  var(--primary_color);
         border-radius:50%;
         padding:3px;
     }
     .tutorName{
-        color:var(--primary_color);
+         color:rgb(168,168,168);
         letter-spacing:1px;
         font-size:15px;
         // color:rgb(168,168,168);
@@ -58,7 +58,7 @@ cursor:pointer;
         letter-spacing:1px;
         color:rgb(168,168,168);
     }
-    .duration{
+    .duration,.courseName{
         letter-spacing:1px;
         color:rgb(168,168,168);
         font-size:12px;

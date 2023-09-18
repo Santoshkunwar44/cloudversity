@@ -1,27 +1,27 @@
 import React from 'react'
 import { CourseCardWrapper } from './CourseCard.styles'
 
-const CourseCard = () => {
+const CourseCard = ({course}) => {
   return (
     <CourseCardWrapper >
         <div className="courseTop">
 
-        <p className='couseTitle'>Basice Level  Nodjes course</p>
+        <p className='couseTitle'>{course.title}</p>
         <div className='tutorBox'>
 
-            <img src="https://images.pexels.com/photos/6326377/pexels-photo-6326377.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" />
+            <img src={course?.tutor?.image} alt="" />
             <div>
-            <p className='tutorName'> Codewithmama</p>
-            <p className='starCount'>21 stars</p>
+            <p className='tutorName'> {course?.tutor.username}</p>
+            <p className='starCount'>{course?.tutor?.star} stars</p>
             </div>
 
 
         </div>
         </div>
         <div className="courseBottom">
-
-        <p className='duration'>Duration : 7 days </p>
-        <p className='startTime'>Starts At 2023 Jan 3rd , 1 : 00 AM</p>
+        <p className='courseName'>Course : {course.course} </p>
+        <p className='duration'>Duration : {course.duration} </p>
+        <p className='startTime'>Starts At {course.startTime}</p>
         </div>
     </CourseCardWrapper>
   )
