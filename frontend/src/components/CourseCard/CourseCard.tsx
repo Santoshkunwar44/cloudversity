@@ -1,9 +1,13 @@
-import React from 'react'
 import { CourseCardWrapper } from './CourseCard.styles'
+import { useNavigate } from 'react-router-dom'
 
 const CourseCard = ({course}) => {
+  const  navigate  = useNavigate()
+  const handleGoToRoom=()=>{
+    navigate(`/course/${course.title}`)
+  }
   return (
-    <CourseCardWrapper >
+    <CourseCardWrapper onClick={handleGoToRoom} >
         <div className="courseTop">
 
         <p className='couseTitle'>{course.title}</p>

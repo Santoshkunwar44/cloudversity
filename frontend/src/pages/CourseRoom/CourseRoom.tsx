@@ -7,6 +7,8 @@ import ParticipantsBox from '../../components/ParticipantsBox/ParticipantsBox'
 import {FaHandPaper} from "react-icons/fa"
 import {AiOutlineRollback} from "react-icons/ai"
 import TutorScreen from '../../components/CourseRoomComp/TutorScreen/TutorScreen'
+import AllParticipants from '../../components/CourseRoomComp/AllParticipants/AllParticipants'
+import LiveChat from '../../components/CourseRoomComp/LiveChat/LiveChat'
 const CourseRoom = () => {
 
     
@@ -61,18 +63,11 @@ const CourseRoom = () => {
                     </div>
                 </div>
                 <TutorScreen/>
-          
-            <div className="participantsBox">
-            <div className="participantsHeader">
-                <p className='participantsHeaderText'>All Participants (45+)</p>
-            </div>
-            <div className="participantsWrapper">
+                <div className="participantsAndLiveChatContainer">
 
-                {
-                    activeParticipants.map(p=><ParticipantsBox key={p._id} participants={p}/>)
-                }
+                <AllParticipants/>
+                <LiveChat/>
                 </div>
-            </div>
         </div>
                 </div>
 

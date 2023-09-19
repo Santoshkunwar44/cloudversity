@@ -140,39 +140,11 @@ gap:2rem;
             }
         }
 
-    }
-    .participantsBox{
-        display:flex;
-        flex-direction:column;
-        gap:2rem;
-        .participantsHeader{
-            .participantsHeaderText{
-            display:inline;
-            position:relative;
-            letter-spacing:1px;
-            
-            &:before{
-                position:absolute;
-                content:"";
-                width:100%;
-                height:3px;
-                bottom:-10px;
-                border-radius:1px;
-                background:linear-gradient(45deg,var(--primary_color),#37e7107a,#37e71030);
-
-            }
-                
-
-            }
-        }
-        .participantsWrapper{
+        .participantsAndLiveChatContainer{
             display:flex;
-            flex-wrap:wrap;
-            
-            gap:0.5rem 0.2rem;
-            
-            
         }
+
     }
+ 
 }
     `

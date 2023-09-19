@@ -22,7 +22,7 @@ const TutorScreen = () => {
 
         <div className='videoWrapper'>
           
-                       <video autoPlay  ref={videoRef}/>
+                       <video autoPlay  ref={videoRef} muted/>
 
             
 
