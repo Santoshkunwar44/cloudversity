@@ -13,6 +13,10 @@
 --primary_color:#37e710;
 }
 body{
-  background-color: var(--main_bg);
-  color: white ;
+  background-color: var(--main_bg) !important;
+  color: white !important;
+}
+h1,h2,h3,h4,h5{
+  font-weight: 600 !important;
+  font-size: 1.4rem;
 }

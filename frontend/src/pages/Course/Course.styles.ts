@@ -2,7 +2,7 @@ import {styled} from "styled-components"
 
 export const CourseWrapper = styled.div`
 
-padding:2rem;
+padding:0 2rem;
 
 .courseMainContainer{
     height:90vh;
