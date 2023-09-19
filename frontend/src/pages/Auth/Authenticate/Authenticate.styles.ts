@@ -5,9 +5,10 @@ export const AuthenticateWrapper = styled.div`
 
 display:flex;
 flex-direction:column;
-gap:2rem;
+
 
 .authenticateContainer{
+    height:90vh;
     display:flex;
     align-items:center;
     justify-content:center;
