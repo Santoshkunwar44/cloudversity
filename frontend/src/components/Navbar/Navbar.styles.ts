@@ -5,7 +5,7 @@ display:flex;
 align-items:center;
 height:10vh;
 border-bottom:1px solid rgb(164,165,165,0.16);
-
+width:100%;
 .navLogo{
     display:flex;
     align-items:center;

@@ -7,7 +7,7 @@ min-width:350px;
 flex:1;
 
 
-background:var(--light_bg);
+background:#1e1e1d7a;
 border-radius:10px;
 padding:1.3rem;
 display:flex;
@@ -31,6 +31,7 @@ cursor:pointer;
         width:40px;
         height:40px;
         border:3px solid  var(--primary_color);
+        object-fit:cover;
         border-radius:50%;
         padding:3px;
     }
