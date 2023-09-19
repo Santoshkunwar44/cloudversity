@@ -169,7 +169,113 @@ export const activeParticipants=[
 {
     _id:"34lkja;lie",
     username:"Ratanis",
-    mage:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"#03023910",
+    username:"Heross",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"324!3432#",
+    username:"Kendera",
+    image:"https://images.pexels.com/photos/6326377/pexels-photo-6326377.jpeg?auto=compress&cs=tinysrgb&w=800",
+
+},
+{
+    _id:"1211",
+    username:"Manishess",
+    image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+    
+},
+{
+    _id:"al;jiba/z8",
+    username:"harish",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:";akjio332",
+    username:"Pinehsirs",
+    image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"12341",
+    username:"Kylefullstack",
+    image:"https://images.pexels.com/photos/7092613/pexels-photo-7092613.jpeg?auto=compress&cs=tinysrgb&w=800"
+},
+{
+    _id:"j;kai3209",
+    username:"Johniess",
+     image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+
+},
+{
+    _id:"12341",
+    username:"Parius",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"23kjla;oiej;a",
+    username:"Santos",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"34lkja;lie",
+    username:"Ratanis",
+    image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"#03023910",
+    username:"Heross",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"324!3432#",
+    username:"Kendera",
+    image:"https://images.pexels.com/photos/6326377/pexels-photo-6326377.jpeg?auto=compress&cs=tinysrgb&w=800",
+
+},
+{
+    _id:"1211",
+    username:"Manishess",
+    image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+    
+},
+{
+    _id:"al;jiba/z8",
+    username:"harish",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:";akjio332",
+    username:"Pinehsirs",
+    image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"12341",
+    username:"Kylefullstack",
+    image:"https://images.pexels.com/photos/7092613/pexels-photo-7092613.jpeg?auto=compress&cs=tinysrgb&w=800"
+},
+{
+    _id:"j;kai3209",
+    username:"Johniess",
+     image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
+
+},
+{
+    _id:"12341",
+    username:"Parius",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"23kjla;oiej;a",
+    username:"Santos",
+    image:"https://images.pexels.com/photos/7369/startup-photos.jpg?auto=compress&cs=tinysrgb&w=800",
+},
+{
+    _id:"34lkja;lie",
+    username:"Ratanis",
+    image:"https://images.pexels.com/photos/4144532/pexels-photo-4144532.jpeg?auto=compress&cs=tinysrgb&w=800",
 },
 {
     _id:"#03023910",

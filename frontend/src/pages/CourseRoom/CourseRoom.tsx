@@ -1,11 +1,16 @@
 import Navbar from '../../components/Navbar/Navbar'
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
-import {BsArrowLeft} from "react-icons/bs"
+import {BsArrowLeft, BsFillMicFill} from "react-icons/bs"
 import { CourseRoomWrapper } from './CourseRoom.styles'
 import { activeParticipants } from '../../utils/data'
 import ParticipantsBox from '../../components/ParticipantsBox/ParticipantsBox'
-
+import {FaHandPaper} from "react-icons/fa"
+import {AiOutlineRollback} from "react-icons/ai"
+import TutorScreen from '../../components/CourseRoomComp/TutorScreen/TutorScreen'
 const CourseRoom = () => {
+
+    
+
   return (
     <CourseRoomWrapper>
         <Navbar/>
@@ -39,21 +44,34 @@ const CourseRoom = () => {
                         <p>Go back </p>
                     </div>
                     <div className="actionRight">
+                        <div className="micBox">
+                            <BsFillMicFill />
+                        </div>
                         <div className="raiseHand">
 
-                        <p>raise hand</p>
-                        <img width="34" height="34" src="https://img.icons8.com/3d-fluency/94/hand--v2.png" alt="hand--v2"/>
+                        {/* <img width="30" height="30" src="https://img.icons8.com/3d-fluency/94/hand--v2.png" alt="hand--v2"/> */}
+                        
+                        <FaHandPaper/>
                         </div>
                         <button className='leaveButton'>
-                            Leave
+                            <AiOutlineRollback/>
+                            <p>Leave</p>
+                            
                         </button>
                     </div>
                 </div>
+                <TutorScreen/>
+          
+            <div className="participantsBox">
+            <div className="participantsHeader">
+                <p className='participantsHeaderText'>All Participants (45+)</p>
+            </div>
+            <div className="participantsWrapper">
 
-            <div className="roomParticipantsWrapper">
                 {
                     activeParticipants.map(p=><ParticipantsBox key={p._id} participants={p}/>)
                 }
+                </div>
             </div>
         </div>
                 </div>
