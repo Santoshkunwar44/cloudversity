@@ -1,4 +1,6 @@
 const UserModel = require("../models/UserModel");
+const  OtpService = require("../services/OtpService");
+
 const { hashPassword } = require("../services/UtilityServices");
 
 class AuthController{
@@ -54,7 +56,7 @@ class AuthController{
     }
     async registerUser(req,res,next){
 
-        let  {number} = req.body;
+        let  {number , email} = req.body;
         
 
 
@@ -67,14 +69,17 @@ class AuthController{
         
         try {
         if(number){
-           
+        //    to be added
         }else{
-            //send verfication code 
+          
+            await OtpService.sendOtpToEmail(email)
+            
         }
 
 
         const newUser =  await UserModel.create({...registerPayload})
         res.status(200).json({message:newUser,success:true})
+        
 
         } catch (error) {
             next(error)

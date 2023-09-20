@@ -15,13 +15,14 @@ class UtilityServices{
 
     async Password(password,hashPassword){
         try {
- 
            const hashed = await bcrypt.compare(password,hashPassword)    
            return hashed;
         } catch (error) {
             throw Error(error.message)
         }
     }
+    
+
 
 }
 
