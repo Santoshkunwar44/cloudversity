@@ -1,7 +1,11 @@
 import { OtpWrapper } from './Otp.styles'
 import Navbar from '../../../components/Navbar/Navbar'
 import {FaArrowRightLong} from "react-icons/fa6"
+import { useLocation } from 'react-router-dom'
 const Otp = () => {
+    const  state = useLocation().state;
+    console.log("auth data",state)
+
   return (
     <OtpWrapper>
         <Navbar/>

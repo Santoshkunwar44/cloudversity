@@ -2,6 +2,7 @@
 const { getOtpHtml } = require("./EmailHtmlService");
 const { sendEmail } = require("./EmailServices")
 const crypto = require('crypto');
+const HashService = require("./HashService");
 
 
 const smsSid = process.env.SMS_SID;
@@ -20,19 +21,19 @@ class OtpService{
     }
 
 
-    async sendOtpToEmail(email) {
+    async sendOtpToEmail(email,otp) {
 
 
         let subject = "Cloudveristy send you otp"
         let text = "Cloudversity send you otp"
 
         try {
-            console.log(this)
-        const otpcode = this.getOtpCode()
+          
+        
 
         const emailPayload = { 
             text,
-            html : getOtpHtml(otpcode) ,
+            html : getOtpHtml(otp) ,
             email,
             subject,
         }
@@ -62,8 +63,8 @@ class OtpService{
     }
 
     verifyOtp(hashedOtp, data) {
-    // let computedHash = hashService.hashOtp(data);
-    //  return computedHash === hashedOtp;
+        let computedHash =  HashService.hashOtp(data)
+        return computedHash === hashedOtp;
     }
 
 }

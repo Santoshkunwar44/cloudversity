@@ -17,12 +17,12 @@ function App() {
 
     <Routes>
       
-      <Route path='/' element={<Navigate to={"/courses"}/>}/>
+      <Route path='/' element={<Navigate to={"/authenticate"}/>}/>
       <Route path='/welcome' element={<Welcome/>}/>
       <Route path='/courses' element={<Course/>}  />
       <Route path='/authenticate' element={<Authenticate/>}/>
       <Route path='/course/:courseName' element={<CourseRoom/>} />
-      <Route path='/otpConfirmation' element={<Otp/>} />
+      <Route path='/otp-confirmation' element={<Otp/>} />
       <Route path='/usersetup' element={<UserSetup/>}/>
    
       

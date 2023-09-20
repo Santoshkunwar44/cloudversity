@@ -75,7 +75,7 @@ flex-direction:column;
         .phoneNumberBox{
             height:45px;
             display:flex;
-            background:#151515;
+            background:#1e1e1e;
             width:270px;
             gap:10px;
             padding:0 1rem;

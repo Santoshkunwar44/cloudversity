@@ -1,25 +1,46 @@
 import { AiOutlineMail } from 'react-icons/ai'
 import Navbar from '../../../components/Navbar/Navbar'
 import { AuthenticateWrapper } from './Authenticate.styles'
-import { MdPhoneAndroid } from 'react-icons/md'
-import { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { ConstantVar } from '../../../utils/Types'
+import { sentOtpApi } from '../../../utils/Api'
+import { useNavigate } from 'react-router-dom'
+
+type EmailAuthPropsType={
+    handleInputChange:(e:ChangeEvent<HTMLInputElement>)=>void;
+   
+}
 
 const Authenticate = () => {
 
 
 
-    const [authTab,setAuthtab] = useState(ConstantVar.PHONE_TAB)
+    const [authTab,setAuthtab] = useState(ConstantVar.EMAIL_TAB);
+    const [ emailInput,setEmailInput] = useState("")
+    const navigate =useNavigate()
     const handleChangeAuthTab=(type:ConstantVar.EMAIL_TAB | ConstantVar.PHONE_TAB)=>{
         setAuthtab(type)
     }
-
-
+    const changeEmailInput=(e:ChangeEvent<HTMLInputElement>)=>{
+        setEmailInput(e.target.value)
+    }
+    const handleSubmit=async()=>{
+        try {
+           const {status,data}=  await sentOtpApi(emailInput)
+           if(status===200){
+            const authData = data.message
+            console.log(authData)
+            navigate("/otp-confirmation",{state:authData})
+           }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const AuthMap={
-    [ConstantVar.EMAIL_TAB] : <EmailAuthentication/>,
+    [ConstantVar.EMAIL_TAB] : <EmailAuthentication handleInputChange={changeEmailInput}/>,
     [ConstantVar.PHONE_TAB]:<PhoneAuthentication/>
     }
-console.log(authTab)
+
   return (
     <AuthenticateWrapper>
 
@@ -29,9 +50,9 @@ console.log(authTab)
             <div className="authenticateContent">
                 <div className='authOptionBox'>
 
-                    <div className={`optionItem ${authTab===ConstantVar.PHONE_TAB ? "activeOption":""}`}onClick={()=>handleChangeAuthTab(ConstantVar.PHONE_TAB)}>
+                    {/* <div className={`optionItem ${authTab===ConstantVar.PHONE_TAB ? "activeOption":""}`}onClick={()=>handleChangeAuthTab(ConstantVar.PHONE_TAB)}>
                         <MdPhoneAndroid/>
-                    </div>
+                    </div> */}
                     <div className={`optionItem ${authTab===ConstantVar.EMAIL_TAB ? "activeOption":""}`} onClick={()=>handleChangeAuthTab(ConstantVar.EMAIL_TAB)}>
                         <AiOutlineMail/>
                     </div>
@@ -41,7 +62,7 @@ console.log(authTab)
 
                         {AuthMap[authTab]}
              
-                    <button className='nextButton'>Next</button>
+                    <button className='nextButton' onClick={handleSubmit}>Next</button>
                     <p className='desc'> By entering number  you are agreeing our  Terms Of Service And Privacy .</p>
 
                 </div>
@@ -79,7 +100,7 @@ const PhoneAuthentication=()=>{
 }
 
 
-const EmailAuthentication=()=>{
+const EmailAuthentication:React.FC<EmailAuthPropsType>=({handleInputChange})=>{
     return <>
     
            <div className='header'>
@@ -91,7 +112,7 @@ const EmailAuthentication=()=>{
 
 
                     
-                    <input type="email" name="" id="" placeholder='example@gmail.com'/>
+                    <input type="email" name="" id="" placeholder='example@gmail.com' onChange={handleInputChange}/>
 
                     </div>
     

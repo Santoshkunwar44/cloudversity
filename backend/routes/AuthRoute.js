@@ -3,7 +3,7 @@ const { registerUser, setUserdata, otpConfirmation } = require("../controllers/A
 const router = require("express").Router()
 
 
-router.post("/register",registerUser)
+router.post("/sentOtp",registerUser)
 
 router.post("/setupUser",setUserdata)
 

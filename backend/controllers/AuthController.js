@@ -1,4 +1,5 @@
 const UserModel = require("../models/UserModel");
+const HashService = require("../services/HashService");
 const  OtpService = require("../services/OtpService");
 
 const { hashPassword } = require("../services/UtilityServices");
@@ -56,7 +57,7 @@ class AuthController{
     }
     async registerUser(req,res,next){
 
-        let  {number , email} = req.body;
+        let  { email} = req.body;
         
 
 
@@ -68,17 +69,23 @@ class AuthController{
         })
         
         try {
-        if(number){
-        //    to be added
-        }else{
-          
-            await OtpService.sendOtpToEmail(email)
+            if(!email){
+                throw new Error("invalid credentails")
+            }
+
+            const otp = OtpService.getOtpCode();
+            const ttl = 2 * 60 * 1000;
+            const expiresAt = Date.now() + ttl;
+            const data = `${email}.${otp}.${expiresAt}`
+            const hash = HashService.hashOtp(data)
+
             
-        }
+          
+        await OtpService.sendOtpToEmail(email,otp)
 
+            
 
-        const newUser =  await UserModel.create({...registerPayload})
-        res.status(200).json({message:newUser,success:true})
+        res.status(200).json({message:{hash:`${hash}.${expiresAt}`,email,otp},success:true})
         
 
         } catch (error) {
@@ -86,7 +93,36 @@ class AuthController{
         }
     }
     async otpConfirmation(req,res,next){
-        res.status(200).json("hello")
+        const {otp,hash,email}  = req.body;
+
+
+        try {
+            
+            if(!otp || !hash || !email){
+                throw new Error("All fields are required")
+            }
+            const [hashedOtp, expires] = hash.split('.');
+
+             if (Date.now() > +expires) {
+                throw new Error("Otp expired")
+            }
+
+            const data = `${email}.${otp}.${expires}`;
+
+            const isValid = OtpService.verifyOtp(hashedOtp,data);
+
+            if (!isValid) {
+                throw new Error("Invalid Otp")
+            }
+            const user = await UserModel.findOne({email})
+            if(!user){
+                await UserModel.create({email});
+            }
+             res.status(200).json({message:"otp confirmed",success:true})
+
+        } catch (error) {
+                next(error)
+        }
     }
 }
 
