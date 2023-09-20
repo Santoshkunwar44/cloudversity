@@ -8,7 +8,7 @@ flex-direction:column;
 align-items:center;
 gap:2rem;
 .welcomeCard{
-    background:var(--light_bg);
+    background:#1f1f1ea1;
     max-width:650px;
     width:95%;
     padding:2rem;

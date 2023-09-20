@@ -17,7 +17,7 @@ flex-direction:column;
             max-width:500px;
             width:95%;
             height:300px;
-            background:#1e1e1d7a;
+            background:#1f1f1ea1;
             padding:2rem;
             justify-content:center;
             display:flex;
