@@ -50,9 +50,13 @@ const Otp = () => {
             try {
 
                 
-           const {status} =  await confirmOtpApi(state); 
+           const {status,data} =  await confirmOtpApi(state); 
            if(status===200){
-            navigate("/usersetup",{state:state.email});
+            if(data.message.verified){
+              navigate("/courses")
+            }else{
+              navigate("/usersetup",{state:state.email});
+            }
            }
             } catch (error) {
                 console.log(error)

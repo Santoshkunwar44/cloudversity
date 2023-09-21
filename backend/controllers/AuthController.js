@@ -109,11 +109,15 @@ class AuthController{
             if (!isValid) {
                 throw new Error("Invalid Otp")
             }
-            const user = await UserModel.findOne({email})
-            if(!user){
-                await UserModel.create({email});
+            let  user = await UserModel.findOne({email})
+            if(user){
+                req.session.user = user;
             }
-             res.status(200).json({message:"otp confirmed",success:true})
+            if(!user){
+              user = await UserModel.create({email});
+            }
+            
+             res.status(200).json({message:user,success:true})
 
         } catch (error) {
                 next(error)

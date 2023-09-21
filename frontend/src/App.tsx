@@ -8,18 +8,27 @@ import Authenticate from './pages/Auth/Authenticate/Authenticate'
 import Otp from './pages/Auth/Otp/Otp'
 import UserSetup from './pages/Auth/UserSetup/UserSetup'
 import useSetup from './hooks/useSetup'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { State } from './redux/reducer'
 
 
 
 function App() {
 
   useSetup()
+  const {user} = useSelector((state:State)=>state.user)
+
+  console.log("the user ",user)
+
+  
+
 
   return (
     <>
     <div className="App">
     <Routes>
-      <Route path='/' element={<Navigate to={"/authenticate"}/>}/>
+      <Route path='/' element={  <Navigate to={user ? "/courses":"/authenticate"}/>}/>
       <Route path='/welcome' element={<Welcome/>}/>
       <Route path='/courses' element={<Course/>}  />
       <Route path='/authenticate' element={<Authenticate/>}/>
