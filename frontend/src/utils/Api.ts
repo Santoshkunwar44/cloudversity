@@ -1,6 +1,16 @@
+import { SetupUserType } from "../pages/Auth/UserSetup/UserSetup";
 import { AxiosInstance } from "./axios";
 
-export const sentOtpApi=(email:string)=>AxiosInstance.post("/auth/sentOtp",{email})
+type confirmOtpType={
+    hash:string,
+    otp:number,
+    email:string
+}
+
+
+export const sentOtpApi=(email:string)=>AxiosInstance.post("/auth/sentOtp",{email});
+export const confirmOtpApi=(payload:confirmOtpType)=>AxiosInstance.post("/auth/otpCofirmation",payload)
+export const setupUserApi=(setupPlayload:SetupUserType)=>AxiosInstance.post("/auth/setupUser",setupPlayload)
 
 
 

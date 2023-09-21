@@ -58,17 +58,13 @@ class AuthController{
     async registerUser(req,res,next){
 
         let  { email} = req.body;
-        
-
-
         let registerPayload = {...req.body};
         Object.entries(registerPayload).map(([key,value])=>{
             if(!registerPayload[key]){
                 delete registerPayload[key];
             }
         })
-        
-        try {
+         try {
             if(!email){
                 throw new Error("invalid credentails")
             }
@@ -79,9 +75,8 @@ class AuthController{
             const data = `${email}.${otp}.${expiresAt}`
             const hash = HashService.hashOtp(data)
 
-            
           
-        await OtpService.sendOtpToEmail(email,otp)
+           await OtpService.sendOtpToEmail(email,otp)
 
             
 

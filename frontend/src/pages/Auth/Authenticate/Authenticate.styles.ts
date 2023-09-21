@@ -47,7 +47,7 @@ flex-direction:column;
         
     }
     .authMainContent{
-      background:#1f1f1ea1;
+       background:#1f1f1ea1;
         height:300px;
         width:100%;
         border-radius:10px;

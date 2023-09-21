@@ -11,6 +11,7 @@ export const UserSetupWrapper = styled.div`
     .userSetupContent{
         display:flex;
         align-items:center;
+        border-radius:10px;
         justify-content:center;
          background:#1f1f1ea1;
         max-width:550px;
@@ -28,6 +29,8 @@ export const UserSetupWrapper = styled.div`
                 letter-spacing:1px;
             }
             img{
+                border-radius:50%;
+                object-fit:cover;
                 width:40px;
                 height:40px;
             }
@@ -45,20 +48,9 @@ export const UserSetupWrapper = styled.div`
             }
         }
 
-        .uploadImage{
-            height:50px;
-            width:80%;
-            border-radius:5px;
-            background:#1e1e1e;
-            letter-spacing:1px;
-            font-size:14px;
-            border:2px solid var(--primary_color);
-            color:var(--primary_color);
-
-        }
         input{
             height:50px;
-            width:80%;
+            width:90%;
             background:#1e1e1e;
             border-radius:5px;
             font-size:14px;
@@ -71,14 +63,33 @@ export const UserSetupWrapper = styled.div`
                 letter-spacing;
             }
         }
-        .nextButton{
-            height:40px;
-            padding:0 2rem;
+        .buttonWrapper{
+            display:flex;
+            align-items:center;
+            gap:1rem;
+            width:90%;
+            .nextButton{
+                height:50px;
+                flex:1;
+                padding:0 2rem;
+                border-radius:5px;
+                color:black;
+                letter-spacing:1px;
+                background:var(--primary_color);
+             
+            }
+
+        .uploadImage{
+            height:50px;
+            flex:1;
             border-radius:5px;
-            color:black;
+            background:#1e1e1e;
             letter-spacing:1px;
-            background:var(--primary_color);
-            margin-top:1rem;
+            font-size:14px;
+            border:1px solid var(--primary_color);
+            color:var(--primary_color);
+
+        }
         }
     }
 }
