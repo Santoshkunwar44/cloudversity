@@ -14,4 +14,8 @@ interface RefreshAction {
     type: ActionTypes.REFRESH;
 }
 
-export type Action = AddUserAction | RemoveUserAction | RefreshAction
+interface SET_USERFETCHED{
+    type:ActionTypes.SET_USERFETCHED,
+    payload:boolean
+}
+export type Action = AddUserAction | RemoveUserAction | RefreshAction | SET_USERFETCHED

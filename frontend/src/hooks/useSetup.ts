@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 const useSetup = () => {
 
     const dispatch = useDispatch()
-    const {AddUserAction} = bindActionCreators(actionCreators,dispatch)
+    const {AddUserAction,setUserFetched} = bindActionCreators(actionCreators,dispatch)
 
     useEffect(()=>{
         fetchLoggedInUser()
@@ -18,7 +18,9 @@ const useSetup = () => {
              if(status===200){
                 AddUserAction(data.message)
              }
+             setUserFetched(true)
         } catch (error) {
+            setUserFetched(true)
             console.log(error)
         }
     }

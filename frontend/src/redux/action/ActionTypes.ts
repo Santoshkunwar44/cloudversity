@@ -3,5 +3,6 @@ export enum ActionTypes{
     REMOVE_USER = "REMOVE_USER",
     LOGOUT = "LOGOUT",
     REFRESH = "REFRESH",
+    SET_USERFETCHED="SET_USERFETCHED"
 
 }

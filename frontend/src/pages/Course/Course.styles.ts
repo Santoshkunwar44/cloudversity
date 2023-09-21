@@ -8,6 +8,7 @@ padding:0 2rem;
     height:90vh;
     display:flex;
     flex-direction:column;
+    padding:2rem 0 ;
     gap:2rem;
     .courseHeader{
         display:flex;

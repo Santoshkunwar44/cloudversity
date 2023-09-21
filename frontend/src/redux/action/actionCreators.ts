@@ -22,3 +22,9 @@ export const refreshAction = () => (dispatch: Dispatch) => {
         type: ActionTypes.REFRESH
     })
 }
+export const setUserFetched = (payload:boolean)=>(dispatch:Dispatch<Action>)=>{
+    return dispatch({
+        type:ActionTypes.SET_USERFETCHED,
+        payload
+    })
+}
