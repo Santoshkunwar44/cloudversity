@@ -1,6 +1,20 @@
 const UserModel= require("../models/UserModel")
 class UserController{
 
+async getSessionuser(req,res){
+    console.log("session user ",req.session.user)
+    try {
+        const loggedInUser = req.session.user;
+        if(loggedInUser){
+            res.status(200).json({message:loggedInUser,success:true})
+        }else{
+            throw new Error("You are not logged in ")
+        }
+    } catch (error) {
+        res.status(500).json({message:error.message,success:true})
+    }
+}
+
 
 async getUsers(req,res){
     try {

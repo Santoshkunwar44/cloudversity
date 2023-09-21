@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { confirmOtpApi } from '../../../utils/Api'
 const Otp = () => {
     const  state = useLocation().state;
-    const inputRefs = Array.from({ length: 6 }, () => useRef<HTMLInputElement>(null));
+    const inputRefs = Array.from({ length: 4 }, () => useRef<HTMLInputElement>(null));
     const [code,setCode] =useState("")
     const navigate =useNavigate()
 

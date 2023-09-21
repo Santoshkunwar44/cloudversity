@@ -27,6 +27,7 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
 app.set("trust proxy", 1); // trust first proxy
 
 
@@ -34,9 +35,6 @@ app.use(cookieParser());
 app.use(morgan("common"));
 app.use(express.json());
 require("./utils/db")();
-
-
-
 
 app.use(
   session({
@@ -51,7 +49,6 @@ app.use(
     },
   })
 );
-
 
 require("./routes/AllRoutes")(app)
 app.use((err,req,res,next)=>{
