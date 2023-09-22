@@ -3,18 +3,19 @@ const mongoose = require("mongoose")
 const CourseSchema = mongoose.Schema({
     title:String,
     noOfDays:Number,
-    noOfHours:Number,
+    duration:Number,
     tutor:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
     startTime:Number,
-    fee:{
+    feeType:{
         type:String,
         enum:["Free","Paid"]
     },
     price:Number,
-    course:String
+    course:String,
+    description:String,
 
 },{timestamps:true})
 

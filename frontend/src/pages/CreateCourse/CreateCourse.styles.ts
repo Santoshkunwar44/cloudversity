@@ -1,46 +1,63 @@
 import {styled} from "styled-components"
 
 export const CreateCourseWrapper = styled.div`
+
 width:100%;
+
 .createCourseContainer{
+
     display:flex;
     justify-content:center;
     padding:2rem;
+
     .createContent{
-        width:60%;
+        width:50%;
         display:flex;
         flex-direction:column;
         gap:2rem;
+
         .createHeader{
+            color:var(--primary_color);
             width:100%;
             display:flex;
             flex-direction:column;
-            gap:15px;
+            gap:10px;
+
             .headerText{
-                font-size:2rem;
+                font-size:1.7rem;
+                text-transform:uppercase;
                 letter-spacing:1px;
             }
+
             .headerDesc{
                 color:gray;
-                font-size:15px;
+                font-size:14px;
+                letter-spacing:1px;
             }
+
         }
 
         .formBox{
             display:flex;
-            flex-wrap:wrap;
-            gap:1.5rem;
+            flex-direction:column;
+            gap:2rem;
+
+            .inputWrapper{
+                display:flex;
+                flex-wrap:wrap;
+                gap:0.8rem;
+            }
+
             .singleItem{
                width:100%;
-                gap:1.5rem;
-            
+                gap:0.8rem;
                 flex-wrap:wrap;
                 display:flex;
             }
+
             .inputItem{
                 min-width:300px;
                 display:flex;
-               
                 flex-direction:column;
                 gap:5px;
                 flex:1;
@@ -51,21 +68,21 @@ width:100%;
                     letter-spacing:1px;
                 }
                 
-                input,textarea,select{
+                .courseInput,.datePicker,textarea,select{
                     height:55px;
                     outline:none;
                     border:none;
                     width:100%;
-                    border-radius:5px;
+                    border-radius:2px;
                     padding:0 10px;
-                    background:#151515;
-                    font-size:12px;
+                    background:#15151562;
+                    font-size:11px;
                     letter-spacing:1px;
-                    color:gray;
+                    color:#80808082;
 
                     &::placeholder{
-                        color:gray;
-                        font-size:12px;
+                        color:#80808082;
+                        font-size:11px;
 
                     }
                 }
@@ -74,6 +91,19 @@ width:100%;
                     height:100px;
                 }
             }
+            
+                .createButton{
+                        background:var(--primary_color);                
+                        height:50px;
+                        width:100%;
+                        text-transform:uppercase;
+                        color:black;;
+                        font-size:18px;
+                        letter-spacing:1px;
+                        border-radius:5px;
+
+                    }
+            
         }
 
 

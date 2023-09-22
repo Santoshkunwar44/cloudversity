@@ -19,7 +19,6 @@ function App() {
   useSetup()
   const {user} = useSelector((state:State)=>state.user)
   const {userFetched} =useSelector((state:State)=>state.other)
-  console.log("the user ",user)
 
   if(!userFetched) return;
 

@@ -1,4 +1,5 @@
 import { SetupUserType } from "../pages/Auth/UserSetup/UserSetup";
+import { Coursetype } from "./Types";
 import { AxiosInstance } from "./axios";
 
 type confirmOtpType={
@@ -15,3 +16,7 @@ export const getSessionApi =()=>AxiosInstance.get("/user/session-user");
 
 
 
+
+//course api endpoints 
+
+export const createNewCourseApi =(payload:Coursetype)=>AxiosInstance.post("/course/create",payload)

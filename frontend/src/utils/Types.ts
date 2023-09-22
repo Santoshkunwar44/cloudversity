@@ -16,5 +16,17 @@ export type UserType={
     _id?:string,
 }
 export type Coursetype={
-    
+
+    title:string,
+    noOfDays:number,
+    duration:number,
+    startTime:number,
+    price?:number,
+    course:string,
+    feeType:"Free"|"Paid",
+    tutor:UserType|string,
+    _id?:string,
+    createdAt?:string,
+    description:string,
+
 }

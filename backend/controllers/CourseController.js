@@ -5,7 +5,7 @@ class CourseController{
 
 async createCourse(req,res){
     try {
-       let  newCourse = await  CourseModel(req.body)
+       let  newCourse = await  CourseModel.create(req.body)
        newCourse = await  newCourse.populate("tutor")
        res.status(200).json({message:newCourse,success:true})
 
