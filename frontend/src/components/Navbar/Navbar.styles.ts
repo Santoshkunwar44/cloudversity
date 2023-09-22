@@ -4,8 +4,9 @@ export const NavbarWrapper= styled.div`
 display:flex;
 align-items:center;
 height:10vh;
-border-bottom:1px solid rgb(164,165,165,0.16);
+border-bottom: 1px solid rgb(240 235 235 / 10%);
 width:100%;
+
 .navLogo{
     display:flex;
     align-items:center;

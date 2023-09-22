@@ -20,3 +20,6 @@ export const getSessionApi =()=>AxiosInstance.get("/user/session-user");
 //course api endpoints 
 
 export const createNewCourseApi =(payload:Coursetype)=>AxiosInstance.post("/course/create",payload)
+export const getAllCourseApi=()=>AxiosInstance.get("/course?all=true");
+export const getLiveCourseApi=()=>AxiosInstance.get("/course?live=true")
+export const getUpcomingCourseApi=()=>AxiosInstance.get("/course?upcoming=true")

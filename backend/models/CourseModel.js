@@ -15,6 +15,10 @@ const CourseSchema = mongoose.Schema({
     },
     price:Number,
     course:String,
+    hasEnded:{
+        type:Boolean,
+        default:false,
+    },
     description:String,
 
 },{timestamps:true})

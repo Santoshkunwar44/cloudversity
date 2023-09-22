@@ -44,8 +44,24 @@ padding:0 2rem;
         }
         .headerText{
             font-size:1.6rem;
-            font-weight:600;
+            color:var(--primary_color);
             letter-spacing:1px;
+            font-weight:100;
+            position:relative;
+            display:inline;
+        
+            &::after{
+                content:"";
+                bottom:-0.5rem;
+                width:100%;
+                left:0rem;
+                border-radius:4px;
+                position:absolute;
+                height:4px;
+                background: linear-gradient(to right, #37e710, #37e710, #37e7109c, #24830f, #1e6f0c, #196a07);
+
+
+            }
       
         }
 
@@ -73,13 +89,13 @@ padding:0 2rem;
                             color:white;
                             letter-spacing:1px;
                             cursor:pointer;
-                            background:rgb(55 231 16 / 18%);
+                            background:#1e1e1e;
 
                             
                         }
                         .active{
                             background:var(--primary_color);
-                            color:white;
+                            color:black;
                             
                         }
                     }

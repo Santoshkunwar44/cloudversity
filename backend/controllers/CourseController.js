@@ -16,11 +16,36 @@ async createCourse(req,res,next){
 }
 async getCourse(req,res,next){
 
+    const {live,upcoming,all}= req.query;
 
 
+    let allCourses ;
     try {
-        const courses = await CourseModel.find({...req.query})
-        res.status(200).json({message:courses,status:200})
+        if(live){
+                allCourses=   await CourseModel.find({
+                 $and: [
+                {startTime: { $lt: new Date() } },
+                {hasEnded:false}
+          ],
+            }).populate("tutor");
+
+        }else if(upcoming){
+                allCourses =  await CourseModel.find({
+                  $and: [
+                 {startTime: { $gt: new Date() } },
+                 {hasEnded:false}
+                  ]
+            }).populate("tutor");
+
+        }else if(all){
+
+            allCourses = await CourseModel.find({hasEnded:false}).populate("tutor")
+        }else{
+            allCourses = await CourseModel.find({...req.query}).populate("tutor")
+        }
+
+        res.status(200).json({message:allCourses,status:200})
+
     } catch (error) {
         next(error)
     }   
