@@ -1,49 +1,65 @@
+import { ChangeEvent, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import { CreateCourseWrapper } from './CreateCourse.styles'
 
 const CreateCourse = () => {
+    const [courseData,setCourseData] = useState({})
+
+    const handleChangeInput  =(event:ChangeEvent<HTMLInputElement>)=>{
+        const {name,value} = event.target;
+        setCourseData(prev=>({...prev,[name]:value}))
+
+    }
+    const handleSelectChange=(event:ChangeEvent<HTMLSelectElement>)=>{
+        const {name,value} = event.target;
+        setCourseData(prev=>({...prev,[name]:value}))
+    }
+
+    const handleTextAreaChange=(event:ChangeEvent<HTMLTextAreaElement>)=>{
+        const {name,value} = event.target;
+        setCourseData(prev=>({...prev,[name]:value}))
+    }
+
   return (
     <CreateCourseWrapper>
         <Navbar/>
         <div className="createCourseContainer">
                 <div className="createContent">
                     <div className="createHeader">
-                        <h1>Upload Course</h1>
+                        <h1 className='headerText'>Upload Course</h1>
                         <p className='headerDesc'>Create your course which you want to provide . You may create a course for free or a paid . Remember that payment for the paid course is not handled by cloudveristy for now . You should manage payment by your own .  </p>
 
                     </div>
-                    <form action="">
+                    <form action="" className='formBox'>
                         <div className="inputItem">
-                            <label htmlFor="">title</label>
-                            <input type="text" name="title" placeholder='title for course' />
+                            <input type="text" name="title" placeholder='title for course' onChange={handleChangeInput} />
+                        </div>
+                        <div className='singleItem'>
+
+                        <div className="inputItem">
+                            <input type="text" name="title" placeholder='price' onChange={handleChangeInput} />
                         </div>
                         <div className="inputItem">
-                            <label htmlFor="">description </label>
-                            <input type="text" name="title" placeholder='title for course' />
+                            <select name="" id="" onChange={handleSelectChange}>
+                                <option value="free">Free</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
                         </div>
                         <div className="inputItem">
-                            <label htmlFor="">price</label>
-                            <input type="text" name="title" placeholder='title for course' />
+                            <input type="text" name="title" placeholder='title for course' onChange={handleChangeInput} />
                         </div>
                         <div className="inputItem">
-                            <label htmlFor="">Fee </label>
-                            <input type="text" name="title" placeholder='title for course' />
+                            <input type="text" name="title" placeholder='Ui/Ux design , Web developement ...' onChange={handleChangeInput} />
                         </div>
                         <div className="inputItem">
-                            <label htmlFor="">Duration </label>
-                            <input type="text" name="title" placeholder='title for course' />
-                        </div>
-                        <div className="inputItem">
-                            <label htmlFor="">Course</label>
-                            <input type="text" name="title" placeholder='Ui/Ux design , Web developement ...' />
-                        </div>
-                        <div className="inputItem">
-                            <label htmlFor="">Number of days</label>
-                            <input type="text" name="title" placeholder='Ui/Ux design , Web developement ...' />
+                            <input type="text" name="title" placeholder='Ui/Ux design , Web developement ...' onChange={handleChangeInput} />
                         </div>
                          <div className="inputItem">
-                            <label htmlFor="">Start Time</label>
-                            <input type="text" name="startTime" placeholder='2022 3rd sep 11:00 PM' />
+                            <input type="text" name="startTime" placeholder='2022 3rd sep 11:00 PM'  onChange={handleChangeInput}/>
+                        </div>
+                        <div className="inputItem">
+                        <textarea placeholder='description about the course ' name="" id=""   onChange={handleTextAreaChange}></textarea>
                         </div>
                     </form>
                 </div>

@@ -15,3 +15,6 @@ export type UserType={
     updatedAt?:string,
     _id?:string,
 }
+export type Coursetype={
+    
+}
