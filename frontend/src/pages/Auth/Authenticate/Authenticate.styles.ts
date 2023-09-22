@@ -104,11 +104,23 @@ flex-direction:column;
         .nextButton{
             height:40px;
             background:var(--primary_color);
-            width:100px;
+            padding:0 1rem;
             border-radius:4px;
+            gap:5px;
             outline:none;
             color:black;
+            font-weight:400px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
             letter-spacing:1px;
+            svg{
+                font-size:17px;
+            }
+        }
+        .isLoading{
+            background:#1e1e1e !important;
+            // border:1px solid var(--primary_color);
         }
 
         .desc{

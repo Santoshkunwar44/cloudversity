@@ -64,10 +64,16 @@ flex-direction:column;
             padding:0 1rem;
             display:flex;
             align-items:center;
-            gap:10px;
+            letter-spacing:1px;
+            gap:4px;
+            justify-content:center;
             background:var(--primary_color);
             color:black;
             border-radius:4px;
+        }
+            .isLoading{
+            background:#1e1e1e !important;
+            // border:1px solid var(--primary_color);
         }
     }
 }

@@ -5,6 +5,8 @@ import React, { ChangeEvent, useState } from 'react'
 import { ConstantVar } from '../../../utils/Types'
 import { sentOtpApi } from '../../../utils/Api'
 import { useNavigate } from 'react-router-dom'
+import { FaArrowRightLong } from 'react-icons/fa6'
+import { LiaAngleDoubleRightSolid } from 'react-icons/lia'
 
 type EmailAuthPropsType={
     handleInputChange:(e:ChangeEvent<HTMLInputElement>)=>void;
@@ -16,6 +18,7 @@ const Authenticate = () => {
 
 
     const [authTab,setAuthtab] = useState(ConstantVar.EMAIL_TAB);
+    const [ isLoading,setIsLoading] =useState(false)
     const [ emailInput,setEmailInput] = useState("")
     const navigate =useNavigate()
     const handleChangeAuthTab=(type:ConstantVar.EMAIL_TAB | ConstantVar.PHONE_TAB)=>{
@@ -25,15 +28,19 @@ const Authenticate = () => {
         setEmailInput(e.target.value)
     }
     const handleSubmit=async()=>{
+        setIsLoading(true)
         try {
            const {status,data}=  await sentOtpApi(emailInput)
            if(status===200){
             const authData = data.message
-            console.log(authData)
+            setIsLoading(false)
             navigate("/otp-confirmation",{state:authData})
+           }else{
+            throw new Error("something went wrong")
            }
         } catch (error) {
             console.log(error)
+            setIsLoading(false)
         }
     }
     const AuthMap={
@@ -62,7 +69,12 @@ const Authenticate = () => {
 
                         {AuthMap[authTab]}
              
-                    <button className='nextButton' onClick={handleSubmit}>Next</button>
+                    <button className={`nextButton ${isLoading && "isLoading"}`} onClick={handleSubmit}>
+                        {isLoading ? <iframe width={"30px"} height={"30px"} src="https://lottie.host/?file=280707aa-34b8-419d-9930-d40c482a843f/MnU3QSAi0U.json"></iframe> :<>
+                        <p>Next</p>
+                         <LiaAngleDoubleRightSolid/>
+                        </>}
+                    </button>
                     <p className='desc'> By entering number  you are agreeing our  Terms Of Service And Privacy .</p>
 
                 </div>

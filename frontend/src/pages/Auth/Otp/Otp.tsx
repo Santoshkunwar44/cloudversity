@@ -1,6 +1,6 @@
 import { OtpWrapper } from './Otp.styles'
 import Navbar from '../../../components/Navbar/Navbar'
-import {FaArrowRightLong} from "react-icons/fa6"
+import {LiaAngleDoubleRightSolid} from "react-icons/lia"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { confirmOtpApi } from '../../../utils/Api'
@@ -9,6 +9,7 @@ const Otp = () => {
     const inputRefs = Array.from({ length: 4 }, () => useRef<HTMLInputElement>(null));
     const [code,setCode] =useState("")
     const navigate =useNavigate()
+    const [isLoading,setIsLoading] =useState(false)
 
     const handleKeyUp = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace' && index > 0 && e.currentTarget.value === '') {
@@ -49,6 +50,7 @@ const Otp = () => {
         if(state){
             try {
 
+              setIsLoading(true)
                 
            const {status,data} =  await confirmOtpApi(state); 
            if(status===200){
@@ -57,13 +59,14 @@ const Otp = () => {
             }else{
               navigate("/usersetup",{state:state.email});
             }
-           }
+           }else throw new Error(data.message)
             } catch (error) {
+              setIsLoading(false)
                 console.log(error)
             }
         }
    }
-    console.log(code)
+    
 
 
 
@@ -94,9 +97,15 @@ const Otp = () => {
                 </div>
                 <p className='resendLink'>Didn't receive ?  Resend again .</p>
 
-                <button className='nextButton' onClick={handleConfirmOpt}>
-                    <p>Next</p>
-                    <FaArrowRightLong/>
+                <button className={`nextButton ${isLoading && "isLoading"  }`} onClick={handleConfirmOpt}>
+                  {
+                    isLoading ? <iframe width={"30px"} height={"30px"} src="https://lottie.host/?file=280707aa-34b8-419d-9930-d40c482a843f/MnU3QSAi0U.json"></iframe>:
+                    <>
+                    
+                   <p>Next</p>
+                    <LiaAngleDoubleRightSolid/>
+                    </>
+                  } 
                 </button>
             </div>
         </div>
