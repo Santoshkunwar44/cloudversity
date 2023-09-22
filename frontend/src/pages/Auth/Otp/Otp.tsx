@@ -4,12 +4,17 @@ import {LiaAngleDoubleRightSolid} from "react-icons/lia"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { confirmOtpApi } from '../../../utils/Api'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../../redux'
+import { useDispatch } from 'react-redux'
 const Otp = () => {
     const  state = useLocation().state;
     const inputRefs = Array.from({ length: 4 }, () => useRef<HTMLInputElement>(null));
     const [code,setCode] =useState("")
     const navigate =useNavigate()
     const [isLoading,setIsLoading] =useState(false)
+    const dispatch = useDispatch()
+    const {AddUserAction} = bindActionCreators(actionCreators,dispatch )
 
     const handleKeyUp = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace' && index > 0 && e.currentTarget.value === '') {
@@ -55,6 +60,7 @@ const Otp = () => {
            const {status,data} =  await confirmOtpApi(state); 
            if(status===200){
             if(data.message.verified){
+              AddUserAction(data.message)
               navigate("/courses")
             }else{
               navigate("/usersetup",{state:state.email});

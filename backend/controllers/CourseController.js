@@ -3,17 +3,18 @@ const CourseModel = require("../models/CourseModel")
 
 class CourseController{
 
-async createCourse(req,res){
+async createCourse(req,res,next){
     try {
        let  newCourse = await  CourseModel.create(req.body)
        newCourse = await  newCourse.populate("tutor")
        res.status(200).json({message:newCourse,success:true})
 
     } catch (error) {
+        console.log(error)
         next(error)  
     }
 }
-async getCourse(req,res){
+async getCourse(req,res,next){
 
 
 
@@ -24,7 +25,7 @@ async getCourse(req,res){
         next(error)
     }   
 }
-async updateCourse(req,res){
+async updateCourse(req,res,next){
     const {id}  = req.params;
 
     try {
@@ -44,7 +45,7 @@ async updateCourse(req,res){
         next(error)
     }
 }
-async deleteCourse(req,res){
+async deleteCourse(req,res,next){
     const {id} = req.params;
     try {
           await CourseModel.deleteOne({_id:id})

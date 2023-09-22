@@ -103,8 +103,8 @@ const CreateCourse = () => {
                         </div>
                         <div className="inputItem">
                             <select name="feeType" id="" onChange={handleSelectChange}>
-                                <option value="free">Free</option>
-                                <option value="paid">Paid</option>
+                                <option value="Free">Free</option>
+                                <option value="Paid">Paid</option>
                             </select>
                         </div>
                         </div>
