@@ -1,4 +1,5 @@
 
+import { IMicrophoneAudioTrack ,ICameraVideoTrack} from "agora-rtc-sdk-ng";
 import { UserType } from "../../utils/Types";
 import { ActionTypes } from "./ActionTypes";
 
@@ -19,3 +20,9 @@ interface SET_USERFETCHED{
     payload:boolean
 }
 export type Action = AddUserAction | RemoveUserAction | RefreshAction | SET_USERFETCHED
+
+interface ADD_LOCALTRACKS{
+    type:ActionTypes.ADD_LOCALTRACKS,
+    payload:[IMicrophoneAudioTrack,ICameraVideoTrack]
+}
+export type CourseCallAction=ADD_LOCALTRACKS

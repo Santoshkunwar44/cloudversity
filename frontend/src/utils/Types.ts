@@ -33,3 +33,21 @@ export type Coursetype={
     description:string,
 
 }
+export type AgoraOptionsType={
+    appId:string,
+    channel:string,
+    token:string,
+    uid:string,
+}
+export type channelOptionsType={
+       // A variable to hold a local audio track.
+    localAudioTrack: null,
+    // A variable to hold a local video track.
+    localVideoTrack: null,
+    // A variable to hold a remote audio track.
+    remoteAudioTrack: null,
+    // A variable to hold a remote video track.
+    remoteVideoTrack: null,
+    // A variable to hold the remote user id.s
+    remoteUid: null,
+}

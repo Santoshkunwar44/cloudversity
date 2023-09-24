@@ -1,75 +1,78 @@
 import Navbar from '../../components/Navbar/Navbar'
-import { Avatar, AvatarGroup } from '@chakra-ui/react'
 import {BsArrowLeft, BsFillMicFill} from "react-icons/bs"
 import { CourseRoomWrapper } from './CourseRoom.styles'
-import { activeParticipants } from '../../utils/data'
-import ParticipantsBox from '../../components/ParticipantsBox/ParticipantsBox'
 import {FaHandPaper} from "react-icons/fa"
 import {AiOutlineRollback} from "react-icons/ai"
 import TutorScreen from '../../components/CourseRoomComp/TutorScreen/TutorScreen'
 import AllParticipants from '../../components/CourseRoomComp/AllParticipants/AllParticipants'
 import LiveChat from '../../components/CourseRoomComp/LiveChat/LiveChat'
+import RoomHeader from '../../components/CourseRoomComp/RoomHeader/RoomHeader'
+import RoomActions from '../../components/CourseRoomComp/RoomActions/RoomActions'
+import { useReducer } from 'react'
+import CourseCallSerice from '../../services/CourseCallService'
+import {  ICameraVideoTrack, IMicrophoneAudioTrack } from 'agora-rtc-sdk-ng'
+import { AgoraOptionsType } from '../../utils/Types'
+import { CourseCallAction } from '../../redux/action'
+import { ActionTypes } from '../../redux/action/ActionTypes'
+
+const agoraOptions:AgoraOptionsType={
+  appId:"9c5900d942a44d5f93feb007b56a6f51",
+  token:"007eJxTYDjUaaQxqW1CWjfzC5U7i+493ZclxmvqINH9bhZT0NObm54oMFgmm1oaGKRYmhglmpikmKZZGqelJhkYmCeZmiWapZka/okSSG0IZGQI6eRlZWSAQBCfh6EktbgkPjkjMS8vNYeBAQBfSyJd",
+  channel:"test_channel",
+  uid:Math.floor(Math.random()*5).toString()
+}
+type initialStateType={
+  localTracks:[IMicrophoneAudioTrack,ICameraVideoTrack]|null
+}
+
+const initialState=  {
+    localTracks:null,
+}
+
+const courseRoomReducer = (state: initialStateType = initialState, action: CourseCallAction): initialStateType => {
+  switch (action.type) {
+    case ActionTypes.ADD_LOCALTRACKS:
+      return { ...state ,localTracks:action.payload }; // You should update the state here with the new local tracks
+
+    default:
+      return state;
+  }
+};
+
 const CourseRoom = () => {
 
+
+    const [state,dispatch]  = useReducer(courseRoomReducer,initialState) ;
+
+    const CallService = new CourseCallSerice({
+      agoraOptions,
+      dispatch
+    });
+
+
+    console.log(state)
     
 
+
+
+
+
   return (
+
+
     <CourseRoomWrapper>
         <Navbar/>
         <div className="courseRoomMainContainer">
-            <div className="roomHeader">
-                <div className="headerLeft">
-                    
-                    <p className='courseTitle'>Nodejs Course for 1 week </p>
-                    <p className='startTime'>Starts At 2023 Dec 23 , 2 : 00 AM</p>
-                </div>
-                <div className="headerRight">
-                    <div className="participantBox">
-                        <AvatarGroup size='sm' max={2}>
-                            <Avatar   borderColor={"#37e710"} name='Ryan Florence' src='https://bit.ly/ryan-florence' />
-                            <Avatar  borderColor={"#37e710"}   name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
-                             <Avatar  borderColor={"#37e710"}  name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
-                            <Avatar   borderColor={"#37e710"}  name='Prosper Otemuyiwa' src='https://bit.ly/prosper-baba' />
-                            <Avatar   borderColor={"#37e710"}  name='Christian Nwamba' src='https://bit.ly/code-beast' />
-                        </AvatarGroup>
-
-                    </div>
-                    {/* <button className='leaveButton'>
-                        Leave
-                    </button> */}
-                </div>
-            </div>
-            <div className="bottomWrapper">
-                <div className="actionBox">
-                    <div className='actionLeft'>
-                        <BsArrowLeft/>
-                        <p>Go back </p>
-                    </div>
-                    <div className="actionRight">
-                        <div className="micBox">
-                            <BsFillMicFill />
-                        </div>
-                        <div className="raiseHand">
-
-                        {/* <img width="30" height="30" src="https://img.icons8.com/3d-fluency/94/hand--v2.png" alt="hand--v2"/> */}
-                        
-                        <FaHandPaper/>
-                        </div>
-                        <button className='leaveButton'>
-                            <AiOutlineRollback/>
-                            <p>Leave</p>
-                            
-                        </button>
-                    </div>
-                </div>
+            <RoomHeader/> 
+              <div className="bottomWrapper">
+                <RoomActions/>
                 <TutorScreen/>
                 <div className="participantsAndLiveChatContainer">
-
                 <AllParticipants/>
                 <LiveChat/>
                 </div>
+           </div>
         </div>
-                </div>
 
     </CourseRoomWrapper>
   )
