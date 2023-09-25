@@ -1,14 +1,11 @@
 import Navbar from '../../components/Navbar/Navbar'
-import {BsArrowLeft, BsFillMicFill} from "react-icons/bs"
 import { CourseRoomWrapper } from './CourseRoom.styles'
-import {FaHandPaper} from "react-icons/fa"
-import {AiOutlineRollback} from "react-icons/ai"
 import TutorScreen from '../../components/CourseRoomComp/TutorScreen/TutorScreen'
 import AllParticipants from '../../components/CourseRoomComp/AllParticipants/AllParticipants'
 import LiveChat from '../../components/CourseRoomComp/LiveChat/LiveChat'
 import RoomHeader from '../../components/CourseRoomComp/RoomHeader/RoomHeader'
 import RoomActions from '../../components/CourseRoomComp/RoomActions/RoomActions'
-import { useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import CourseCallSerice from '../../services/CourseCallService'
 import {  ICameraVideoTrack, IMicrophoneAudioTrack } from 'agora-rtc-sdk-ng'
 import { AgoraOptionsType } from '../../utils/Types'
@@ -50,7 +47,10 @@ const CourseRoom = () => {
     });
 
 
-    console.log(state)
+    
+    useEffect(()=>{
+      CallService.JoinCall()
+    },[])
     
 
 
