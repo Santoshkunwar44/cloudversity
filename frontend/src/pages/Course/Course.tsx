@@ -73,9 +73,7 @@ const Course = () => {
             
 
             <p className='headerText'>Available courses</p>
-            {/* <div className="searchBox" >
-                <input type="text"  placeholder='search courses'/>
-            </div> */}
+        
           
             <div className="courseRight">
             <div className="filterBox">

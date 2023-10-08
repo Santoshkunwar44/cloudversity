@@ -15,7 +15,7 @@ const CourseCard:React.FC<coursePropsType> = ({course}) => {
   },[course])
 
   const handleGoToRoom=()=>{
-    navigate(`/course/${course.title}`)
+    navigate(`/course?courseName=${course.title}`)
   }
 
 

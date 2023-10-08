@@ -17,7 +17,7 @@ async createCourse(req,res,next){
 async getCourse(req,res,next){
 
     const {live,upcoming,all}= req.query;
-
+    console.log(req.query)
 
     let allCourses ;
     try {
@@ -41,6 +41,7 @@ async getCourse(req,res,next){
 
             allCourses = await CourseModel.find({hasEnded:false}).populate("tutor")
         }else{
+            console.log("insides",await CourseModel.find({...req.query}).populate("tutor"))
             allCourses = await CourseModel.find({...req.query}).populate("tutor")
         }
 

@@ -54,12 +54,12 @@ export type channelOptionsType={
     // A variable to hold the remote user id.s
     remoteUid: null,
 }
-export type RemoteUsers = Record<string, IAgoraRTCRemoteUser>;
+export type RemoteUsers = IAgoraRTCRemoteUser[]
 
 export type initialStateType={
   localTracks:[IMicrophoneAudioTrack,ICameraVideoTrack]|null,
   remoteUsers:RemoteUsers,
-  courseData:null| Coursetype
+  courseData:null| Coursetype,
 }
 export type clientType={
     rtc:{

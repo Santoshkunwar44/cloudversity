@@ -37,7 +37,7 @@ function App() {
       <Route element={<ProtectedRoutes/>}>
 
       <Route path='/courses' element={<Course/>}  />
-      <Route path='/course/:courseName' element={<CourseRoom/>} />
+      <Route path='/course' element={<CourseRoom/>} />
       <Route path='/create-course' element={<CreateCourse/>}/>
       </Route>
     </Routes>

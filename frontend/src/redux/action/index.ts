@@ -1,5 +1,5 @@
 
-import { IMicrophoneAudioTrack ,ICameraVideoTrack} from "agora-rtc-sdk-ng";
+import { IMicrophoneAudioTrack ,ICameraVideoTrack, IAgoraRTCRemoteUser} from "agora-rtc-sdk-ng";
 import { Coursetype, RemoteUsers, UserType } from "../../utils/Types";
 import { ActionTypes } from "./ActionTypes";
 
@@ -25,7 +25,7 @@ export type Action = AddUserAction | RemoveUserAction | RefreshAction | SET_USER
 
 interface ADD_REMOTE_USERS{
     type:ActionTypes.ADD_REMOTE_USERS,
-    payload:RemoteUsers
+    payload:IAgoraRTCRemoteUser
 }
 interface ADD_LOCALTRACKS{
     type:ActionTypes.ADD_LOCALTRACKS,
