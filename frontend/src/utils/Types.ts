@@ -1,3 +1,6 @@
+import { IAgoraRTCClient, IAgoraRTCRemoteUser, ICameraVideoTrack, IMicrophoneAudioTrack } from "agora-rtc-sdk-ng";
+import { RtmChannel, RtmClient } from "agora-rtm-sdk";
+
 export enum ConstantVar {
     EMAIL_TAB= "EMAIL_TAB",
     PHONE_TAB= "PHONE_TAB",
@@ -50,4 +53,24 @@ export type channelOptionsType={
     remoteVideoTrack: null,
     // A variable to hold the remote user id.s
     remoteUid: null,
+}
+export type RemoteUsers = Record<string, IAgoraRTCRemoteUser>;
+
+export type initialStateType={
+  localTracks:[IMicrophoneAudioTrack,ICameraVideoTrack]|null,
+  remoteUsers:RemoteUsers,
+  courseData:null| Coursetype
+}
+export type clientType={
+    rtc:{
+        client: IAgoraRTCClient|null,
+        localAudioTrack: IMicrophoneAudioTrack| null,
+        localVideoTrack: ICameraVideoTrack | null ,
+
+    },
+    rtm:{
+
+        client:RtmClient|null,
+        channel:RtmChannel|null,
+    }
 }

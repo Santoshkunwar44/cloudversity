@@ -23,3 +23,6 @@ export const createNewCourseApi =(payload:Coursetype)=>AxiosInstance.post("/cour
 export const getAllCourseApi=()=>AxiosInstance.get("/course?all=true");
 export const getLiveCourseApi=()=>AxiosInstance.get("/course?live=true")
 export const getUpcomingCourseApi=()=>AxiosInstance.get("/course?upcoming=true")
+export const getCoruseByNameApi=(title:string)=>AxiosInstance.get(`/course?title=${title}`)
+
+

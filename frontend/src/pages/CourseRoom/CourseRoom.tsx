@@ -5,52 +5,79 @@ import AllParticipants from '../../components/CourseRoomComp/AllParticipants/All
 import LiveChat from '../../components/CourseRoomComp/LiveChat/LiveChat'
 import RoomHeader from '../../components/CourseRoomComp/RoomHeader/RoomHeader'
 import RoomActions from '../../components/CourseRoomComp/RoomActions/RoomActions'
-import { useEffect, useReducer } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 import CourseCallSerice from '../../services/CourseCallService'
-import {  ICameraVideoTrack, IMicrophoneAudioTrack } from 'agora-rtc-sdk-ng'
-import { AgoraOptionsType } from '../../utils/Types'
+import {  initialStateType } from '../../utils/Types'
 import { CourseCallAction } from '../../redux/action'
 import { ActionTypes } from '../../redux/action/ActionTypes'
+import { useSelector } from 'react-redux'
+import { State } from '../../redux/reducer'
+import { useParams } from 'react-router-dom'
 
-const agoraOptions:AgoraOptionsType={
-  appId:"9c5900d942a44d5f93feb007b56a6f51",
-  token:"007eJxTYDjUaaQxqW1CWjfzC5U7i+493ZclxmvqINH9bhZT0NObm54oMFgmm1oaGKRYmhglmpikmKZZGqelJhkYmCeZmiWapZka/okSSG0IZGQI6eRlZWSAQBCfh6EktbgkPjkjMS8vNYeBAQBfSyJd",
-  channel:"test_channel",
-  uid:Math.floor(Math.random()*5).toString()
-}
-type initialStateType={
-  localTracks:[IMicrophoneAudioTrack,ICameraVideoTrack]|null
-}
 
-const initialState=  {
+const initialState:initialStateType=  {
     localTracks:null,
+    remoteUsers:{},
+    courseData:null
 }
 
-const courseRoomReducer = (state: initialStateType = initialState, action: CourseCallAction): initialStateType => {
+const courseRoomReducer = (state = initialState, action: CourseCallAction): initialStateType => {
   switch (action.type) {
     case ActionTypes.ADD_LOCALTRACKS:
       return { ...state ,localTracks:action.payload }; // You should update the state here with the new local tracks
+
+    case ActionTypes.ADD_REMOTE_USERS:
+      const newRemoteUser = action.payload
+      return {...state , remoteUsers: {...state.remoteUsers ,...newRemoteUser }}
+
+    case ActionTypes.ADD_COURSE_DATA:
+    return {...state, courseData:action.payload}
 
     default:
       return state;
   }
 };
 
+
+
+
 const CourseRoom = () => {
 
-
+    const {user} = useSelector((state:State)=>state.user)
     const [state,dispatch]  = useReducer(courseRoomReducer,initialState) ;
+    const {courseName}  = useParams()
+
+    const client = useRef({
+        rtc: {
+            // For the local client.
+            client: null,
+            // For the local audio and video tracks.
+            localAudioTrack: null,
+            localVideoTrack: null,
+        },
+        rtm: {
+            client: null,
+            channel: null
+        }
+    });
 
     const CallService = new CourseCallSerice({
-      agoraOptions,
+      currentUser:user,
+      client,
       dispatch
     });
 
 
+    useEffect(()=>{
+      if(!courseName)return;
+      CallService.getRoomDataFromDB(courseName)
+    },[courseName])
     
     useEffect(()=>{
-      CallService.JoinCall()
-    },[])
+      if(user && state.courseData){
+        // CallService.init()
+      }
+    },[user,state.courseData])
     
 
 
@@ -68,7 +95,7 @@ const CourseRoom = () => {
                 <RoomActions/>
                 <TutorScreen/>
                 <div className="participantsAndLiveChatContainer">
-                <AllParticipants/>
+                <AllParticipants users={state.remoteUsers}/>
                 <LiveChat/>
                 </div>
            </div>

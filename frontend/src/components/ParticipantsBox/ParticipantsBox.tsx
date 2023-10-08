@@ -1,7 +1,21 @@
 
+import { IAgoraRTCRemoteUser } from 'agora-rtc-sdk-ng'
 import { ParticipantsBoxWrapper } from './Participants.styles'
+import { useEffect } from 'react'
 
-const ParticipantsBox = ({participants}) => {
+type ParticipantType={
+  user:IAgoraRTCRemoteUser
+}
+const ParticipantsBox:React.FC<ParticipantType> = ({user}) => {
+
+    useEffect(()=>{
+    if(user){
+      if(user.hasAudio){
+        user.audioTrack?.play()
+      }
+    }
+     },[user])
+     
     const borderColors={
         "0":"#37e710",
         "1":"#546de5",
@@ -10,14 +24,15 @@ const ParticipantsBox = ({participants}) => {
         "4":"#f6b93b"
 
     }
+
     function getRandomNo(){
         return Math.floor(Math.random()*5).toString()
     }
   return (
-    <ParticipantsBoxWrapper isSpeaking={participants.isSpeaking} borderColor={borderColors[getRandomNo()]}>
+    <ParticipantsBoxWrapper isSpeaking={false} borderColor={borderColors[getRandomNo()]}>
 
-        <img src={participants.image} alt="" />
-        <p className='participantName'>{participants.username}</p>
+        <img src="https://images.pexels.com/photos/18125686/pexels-photo-18125686/free-photo-of-woman-posing-at-night.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load" alt="" />
+        <p className='participantName'>John</p>
 
     </ParticipantsBoxWrapper>
   )

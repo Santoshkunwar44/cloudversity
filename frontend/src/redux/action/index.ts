@@ -1,6 +1,6 @@
 
 import { IMicrophoneAudioTrack ,ICameraVideoTrack} from "agora-rtc-sdk-ng";
-import { UserType } from "../../utils/Types";
+import { Coursetype, RemoteUsers, UserType } from "../../utils/Types";
 import { ActionTypes } from "./ActionTypes";
 
 
@@ -19,10 +19,21 @@ interface SET_USERFETCHED{
     type:ActionTypes.SET_USERFETCHED,
     payload:boolean
 }
-export type Action = AddUserAction | RemoveUserAction | RefreshAction | SET_USERFETCHED
 
+
+export type Action = AddUserAction | RemoveUserAction | RefreshAction | SET_USERFETCHED ;
+
+interface ADD_REMOTE_USERS{
+    type:ActionTypes.ADD_REMOTE_USERS,
+    payload:RemoteUsers
+}
 interface ADD_LOCALTRACKS{
     type:ActionTypes.ADD_LOCALTRACKS,
     payload:[IMicrophoneAudioTrack,ICameraVideoTrack]
 }
-export type CourseCallAction=ADD_LOCALTRACKS
+interface ADD_DEBATE_DATA{
+    type:ActionTypes.ADD_COURSE_DATA,
+    payload:Coursetype
+}
+
+export type CourseCallAction = ADD_LOCALTRACKS | ADD_REMOTE_USERS |ADD_DEBATE_DATA

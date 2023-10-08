@@ -1,8 +1,15 @@
-import { activeParticipants } from "../../../utils/data"
+import { RemoteUsers } from "../../../utils/Types"
 import ParticipantsBox from "../../ParticipantsBox/ParticipantsBox"
 import { AllParticipantsWrapper } from "./AllParticipants.styles"
 
-const AllParticipants = () => {
+type AllParticipantsPropsType={
+  users:RemoteUsers
+}
+
+const AllParticipants:React.FC<AllParticipantsPropsType> = ({users}) => {
+
+
+
   return (
     <AllParticipantsWrapper>
  
@@ -12,7 +19,7 @@ const AllParticipants = () => {
             <div className="participantsWrapper">
 
                 {
-                    activeParticipants.map(p=><ParticipantsBox key={p._id} participants={p}/>)
+                  Object.entries(users).map(([uid,user])=><ParticipantsBox key={uid} user={user}/>)
                 }
                 </div>
          
