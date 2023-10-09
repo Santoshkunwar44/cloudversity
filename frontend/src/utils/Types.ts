@@ -9,6 +9,13 @@ export enum ConstantVar {
     LIVE_COURSES="LIVE_DEBATES"
 }
 
+export type AgoraArgumentPayload={
+  channelName:string,
+  role:string,
+  tokentype:string,
+  uid:string,
+  expiry:number,
+}
 
 
 

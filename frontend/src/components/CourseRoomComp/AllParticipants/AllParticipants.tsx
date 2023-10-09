@@ -3,7 +3,7 @@ import ParticipantsBox from "../../ParticipantsBox/ParticipantsBox"
 import { AllParticipantsWrapper } from "./AllParticipants.styles"
 
 type AllParticipantsPropsType={
-  users:
+  users:RemoteUsers
 }
 
 const AllParticipants:React.FC<AllParticipantsPropsType> = ({users}) => {

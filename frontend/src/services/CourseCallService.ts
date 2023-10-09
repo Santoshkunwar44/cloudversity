@@ -3,15 +3,14 @@ import React from "react";
 import { CourseCallAction } from "../redux/action";
 
 import AgoraRTM from 'agora-rtm-sdk'
-import {  IAgoraRTCRemoteUser, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
-import {  getCoruseByNameApi } from "../utils/Api";
+import {  IAgoraRTCRemoteUser } from "agora-rtc-react";
+import {  getAgoraTokenApi, getCoruseByNameApi } from "../utils/Api";
 import { ActionTypes } from "../redux/action/ActionTypes";
-const useMicAndCamera = createMicrophoneAndCameraTracks()
-const useClient = createClient({ mode: "rtc", codec: "vp8" })
+
 
  const agoraOptions:AgoraOptionsType={
-  appId:"9c5900d942a44d5f93feb007b56a6f51",
-  token:"007eJxTYDjUaaQxqW1CWjfzC5U7i+493ZclxmvqINH9bhZT0NObm54oMFgmm1oaGKRYmhglmpikmKZZGqelJhkYmCeZmiWapZka/okSSG0IZGQI6eRlZWSAQBCfh6EktbgkPjkjMS8vNYeBAQBfSyJd",
+  appId:"f90befed3935402ab7fe3525d87f7f80",
+  token:"007eJxTYCgyWblN8krymsqPrr8VdD0CvzH3GXLNTzrxdu/ZXNNf/8MUGNIsDZJS01JTjC2NTU0MjBKTzNNSjU2NTFMszNPM0ywM9i1UTm0IZGTQV8lhYWSAQBCfh6EktbgkPjkjMS8vNYeBAQCcGCMc",
   channel:"test_channel",
   uid:Math.floor(Math.random()*5).toString()
 }
@@ -36,33 +35,46 @@ class CourseCallSerice{
     }
     
     
-    
-    async init(){
-
+    async getAgoraToken() {
       if(!this.courseData)return;
+  try {
+    const res = await getAgoraTokenApi({ channelName:"test", role: "publisher", uid:agoraOptions.uid.toString(), tokentype: "1000", expiry: 86400 })
+  if (res.status === 200) {
+    let { rtcToken, rtmToken } = res.data;
+      await this.init(rtmToken,rtcToken);
+    
+   }
+} catch (error) {
+  console.log(error)
+}
+}
+    
+    async init(rtmToken:string,rtcToken:string){
 
-        const { ready, tracks } = useMicAndCamera()
-        const channelName = this.courseData.title
-        this.initClientEvents();
-        this.client.current.rtc.client = useClient();
+      if(this.courseData &&this.client.current.rtc.client && this.client.current.rtc.localAudioTrack && this.client.current.rtc.localVideoTrack){
+
+        
+        const channelName ="test"
+        
         this.client.current.rtm.client = AgoraRTM.createInstance(agoraOptions.appId)
-        await this.client.current.rtm.client.login({ uid: this.currentUser?._id  ?? agoraOptions.uid.toString() })
-        this.client.current.rtm.channel = await this.client.current.rtm.client.createChannel(channelName)
+        await this.client.current.rtm.client.login({ uid:agoraOptions.uid.toString(),token:rtmToken })
+        this.client.current.rtm.channel = this.client.current.rtm.client.createChannel(channelName)
         await this.client.current.rtm.channel.join()
-        let uid = await this.client.current.rtc.client.join(agoraOptions.appId, channelName, agoraOptions.token, null);
-        let userId = this.currentUser?._id ?? uid.toLocaleString();
-
-        let obj  ={
-          [userId]:  JSON.stringify({ uid: this.currentUser?._id, username: this.currentUser?.username, admin: false })
-        }
-        // adding the channel attribute 
-        await this.client.current.rtm.client.addOrUpdateChannelAttributes(channelName, obj , { enableNotificationToChannelMembers: true });
-
-        if (ready && tracks) {
-            [this.client.current.rtc.localAudioTrack, this.client.current.rtc.localVideoTrack] = tracks
-            //publishing the streams
-              await this.client.current.rtc.client.publish([tracks[0],tracks[1]]);
-        }
+        await this.client.current.rtc.client.join(agoraOptions.appId, channelName,rtcToken, null);
+        this.initClientEvents();
+        // let userId = this.currentUser?._id ?? uid.toLocaleString();
+        
+        // let obj  ={
+          //   [userId]:  JSON.stringify({ uid: this.currentUser?._id, username: this.currentUser?.username, admin: false })
+          // }
+          // adding the channel attribute 
+          // await this.client.current.rtm.client.addOrUpdateChannelAttributes(channelName, obj , { enableNotificationToChannelMembers: true });
+          
+          
+          //publishing the streams
+          // await this.client.current.rtc.client.publish([this.client.current.rtc.localAudioTrack,this.client.current.rtc.localVideoTrack]);
+          
+      }
 
     }
 
@@ -88,7 +100,7 @@ class CourseCallSerice{
     }
 
      async initClientEvents(){ 
-
+        console.log("init cient event ")
         if(this.client.current.rtc.client){
 
           this.client.current.rtc.client.on('user-joined',this.handleUserJoined)
@@ -103,13 +115,17 @@ class CourseCallSerice{
 
 
     async handleUserJoined(user:IAgoraRTCRemoteUser){
+      console.log("someone jined",user)
     }
 
     async handleUserLeave(user:IAgoraRTCRemoteUser){
+      console.log("someone left",user)
     }
 
     async handleUserPublished(user:IAgoraRTCRemoteUser,type:"audio" | "video" | "datachannel"){
+      if(type==="audio"){
 
+      }
     }
 
     async handleUserUnpublished(user:IAgoraRTCRemoteUser,type:"audio" | "video" | "datachannel"){

@@ -7,13 +7,14 @@ import RoomHeader from '../../components/CourseRoomComp/RoomHeader/RoomHeader';
 import RoomActions from '../../components/CourseRoomComp/RoomActions/RoomActions';
 import { useEffect, useReducer, useRef } from 'react';
 import CourseCallSerice from '../../services/CourseCallService';
-import {  initialStateType } from '../../utils/Types';
+import {  clientType, initialStateType } from '../../utils/Types';
 import { CourseCallAction } from '../../redux/action';
 import { ActionTypes } from '../../redux/action/ActionTypes';
 import { useSelector } from 'react-redux';
 import { State } from '../../redux/reducer';
 import { useLocation  } from 'react-router-dom';
 import queryString from "query-string";
+import { createClient, createMicrophoneAndCameraTracks } from 'agora-rtc-react';
 
 const initialState:initialStateType=  {
     localTracks:null,
@@ -31,8 +32,8 @@ const courseRoomReducer = (state = initialState, action: CourseCallAction): init
     case ActionTypes.ADD_REMOTE_USERS:    
       return {...state , remoteUsers: [...state.remoteUsers , action.payload ]}  
 
-    case ActionTypes.ADD_COURSE_DATA:
-    return {...state, courseData:action.payload}
+    case ActionTypes.ADD_COURSE_DATA:  
+    return {...state, courseData : action.payload}   
 
     default:
       return state;
@@ -47,8 +48,11 @@ const CourseRoom = () => {
     const [state,dispatch]  = useReducer(courseRoomReducer,initialState) ;
     const queryParams = queryString.parse(location.search);
     const courseName = queryParams.courseName;
+    const useMicAndCamera = createMicrophoneAndCameraTracks()
+    const { ready, tracks } = useMicAndCamera()
 
-    const client = useRef({
+   const useClient = createClient({ mode: "rtc", codec: "vp8" })
+    const client:React.MutableRefObject<clientType>= useRef({
         rtc: {
             // For the local client.
             client: null,
@@ -61,6 +65,13 @@ const CourseRoom = () => {
             channel: null
         }
     });
+    client.current.rtc.client = useClient();
+    
+    useEffect(()=>{
+      if(ready && tracks){
+        [client.current.rtc.localAudioTrack,client.current.rtc.localVideoTrack] = tracks;
+      }
+    },[ready])
 
     const CallService = new CourseCallSerice({
       currentUser:user,
@@ -80,7 +91,7 @@ const CourseRoom = () => {
     
     useEffect(()=>{
       if(user && state.courseData){
-        // CallService.init()
+        CallService.getAgoraToken()
       }
     },[user,state.courseData])
 

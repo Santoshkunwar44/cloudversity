@@ -1,5 +1,5 @@
 import { SetupUserType } from "../pages/Auth/UserSetup/UserSetup";
-import { Coursetype } from "./Types";
+import { AgoraArgumentPayload, Coursetype } from "./Types";
 import { AxiosInstance } from "./axios";
 
 type confirmOtpType={
@@ -26,3 +26,9 @@ export const getUpcomingCourseApi=()=>AxiosInstance.get("/course?upcoming=true")
 export const getCoruseByNameApi=(title:string)=>AxiosInstance.get(`/course?title=${title}`)
 
 
+
+// agora endpints
+export const getAgoraTokenApi = ({ channelName, role,  tokentype, uid, expiry}:AgoraArgumentPayload) =>
+  AxiosInstance.get(
+    `/auth/rte/${channelName}/${role}/${tokentype}/${uid}/?expiry=${expiry}`
+  );
